@@ -171,7 +171,7 @@ assignment13-ub-detection/
 │
 ├── README.md                        ← This file
 │
-├── benchmarks/                      ← All benchmark C programs
+├── testcases/                      ← All benchmark C programs
 │   ├── ub_signed_overflow.c
 │   ├── ub_null_deref.c
 │   ├── ub_oob_access.c
@@ -229,7 +229,7 @@ assignment13-ub-detection/
 Create this structure with:
 
 ```bash
-mkdir -p assignment13-ub-detection/{benchmarks/safe_programs,llvm_experiments/results,tool_results,llm_results,scripts,results,report,presentation}
+mkdir -p assignment13-ub-detection/{testcases/safe_programs,llvm_experiments/results,tool_results,llm_results,scripts,results,report,presentation}
 cd assignment13-ub-detection
 ```
 
@@ -271,7 +271,7 @@ Example thought process for signed overflow:
 
 ## 5. Phase 2 — Writing Benchmark C/C++ Programs
 
-Write all programs in the `benchmarks/` directory. Each program should be small (10–30 lines), focused on one UB class, and compilable with `clang`.
+Write all programs in the `testcases/` directory. Each program should be small (10–30 lines), focused on one UB class, and compilable with `clang`.
 
 ### Program 1 — Signed Integer Overflow (`ub_signed_overflow.c`)
 
@@ -564,10 +564,10 @@ For each benchmark program, compile to LLVM IR at O0 and O2:
 PROG="ub_signed_overflow"
 
 # Unoptimized IR
-clang -O0 -S -emit-llvm benchmarks/${PROG}.c -o llvm_experiments/results/${PROG}_O0.ll
+clang -O0 -S -emit-llvm testcases/${PROG}.c -o llvm_experiments/results/${PROG}_O0.ll
 
 # Optimized IR
-clang -O2 -S -emit-llvm benchmarks/${PROG}.c -o llvm_experiments/results/${PROG}_O2.ll
+clang -O2 -S -emit-llvm testcases/${PROG}.c -o llvm_experiments/results/${PROG}_O2.ll
 
 # Compare the two
 diff llvm_experiments/results/${PROG}_O0.ll llvm_experiments/results/${PROG}_O2.ll
@@ -582,7 +582,7 @@ Create this script to automate all IR generation:
 # scripts/run_experiments.sh
 # Generates O0 and O2 LLVM IR for all benchmark programs
 
-BENCHMARKS_DIR="./benchmarks"
+BENCHMARKS_DIR="./testcases"
 RESULTS_DIR="./llvm_experiments/results"
 mkdir -p "$RESULTS_DIR"
 
@@ -649,12 +649,12 @@ Compile and run the same program at O0 and O2 to see different outputs:
 
 ```bash
 # Compile at O0 (no optimization)
-clang -O0 -o test_O0 benchmarks/ub_signed_overflow.c
+clang -O0 -o test_O0 testcases/ub_signed_overflow.c
 ./test_O0
 # Output: check_overflow(INT_MAX) = 0   (overflow actually happened)
 
 # Compile at O2 (optimized)
-clang -O2 -o test_O2 benchmarks/ub_signed_overflow.c
+clang -O2 -o test_O2 testcases/ub_signed_overflow.c
 ./test_O2
 # Output: check_overflow(INT_MAX) = 1   (optimizer removed the else branch!)
 ```
@@ -726,7 +726,7 @@ cat tool_results/ubsan_results.txt
 OUTPUT_FILE="./tool_results/clang_warnings.txt"
 echo "====== Clang Static Warnings ======" > "$OUTPUT_FILE"
 
-for SRC in benchmarks/*.c; do
+for SRC in testcases/*.c; do
     PROG=$(basename "$SRC" .c)
     echo "--- $PROG ---" >> "$OUTPUT_FILE"
     clang -Wall -Wextra -Weverything -Wno-padded \

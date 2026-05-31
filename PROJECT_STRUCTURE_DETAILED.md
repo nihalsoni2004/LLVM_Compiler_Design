@@ -13,54 +13,54 @@ This file explains every major folder and file in the repository and what each o
   - Contains installed Python packages used by scripts.
 
 - `test_O0`, `test_O2`
-  - Demo binaries built from `benchmarks/ub_signed_overflow.c`.
+  - Demo binaries built from `testcases/ub_signed_overflow.c`.
   - Used to show optimization behavior differences.
 
 ## Benchmarks
 
-- `benchmarks/`
+- `testcases/`
   - UB-focused C benchmark programs used for evaluation.
 
-- `benchmarks/ub_signed_overflow.c`
+- `testcases/ub_signed_overflow.c`
   - Signed integer overflow UB benchmark.
 
-- `benchmarks/ub_null_deref.c`
+- `testcases/ub_null_deref.c`
   - Null pointer dereference UB benchmark.
 
-- `benchmarks/ub_oob_access.c`
+- `testcases/ub_oob_access.c`
   - Out-of-bounds array access UB benchmark.
 
-- `benchmarks/ub_invalid_shift.c`
+- `testcases/ub_invalid_shift.c`
   - Invalid shift UB benchmark (negative / too-large shift).
 
-- `benchmarks/ub_use_after_free.c`
+- `testcases/ub_use_after_free.c`
   - Use-after-free UB benchmark.
 
-- `benchmarks/ub_uninitialized.c`
+- `testcases/ub_uninitialized.c`
   - Uninitialized read UB benchmark.
 
-- `benchmarks/ub_div_zero.c`
+- `testcases/ub_div_zero.c`
   - Integer division-by-zero UB benchmark.
 
-- `benchmarks/ub_type_punning.c`
+- `testcases/ub_type_punning.c`
   - Strict aliasing/type punning UB benchmark.
 
-- `benchmarks/ub_double_free.c`
+- `testcases/ub_double_free.c`
   - Double free UB benchmark.
 
-- `benchmarks/ub_string_literal.c`
+- `testcases/ub_string_literal.c`
   - String literal modification UB benchmark.
 
-- `benchmarks/safe_programs/`
+- `testcases/safe_programs/`
   - Safe baseline programs used for false-positive checks.
 
-- `benchmarks/safe_programs/safe_arithmetic.c`
+- `testcases/safe_programs/safe_arithmetic.c`
   - Safe integer handling baseline.
 
-- `benchmarks/safe_programs/safe_array.c`
+- `testcases/safe_programs/safe_array.c`
   - Safe bounds-checked array access baseline.
 
-- `benchmarks/safe_programs/safe_pointers.c`
+- `testcases/safe_programs/safe_pointers.c`
   - Safe pointer/null-check baseline.
 
 ## LLVM Experiments

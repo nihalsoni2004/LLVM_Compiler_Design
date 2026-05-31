@@ -10,7 +10,7 @@ This document defines metrics, test cases, and the comparison methodology used i
 - Explanation quality (qualitative) for LLM: correctness, completeness, and helpfulness.
 
 ## Testcases
-- All benchmark programs are in `benchmarks/` (or `testcases/` after syncing). Each file targets a single UB class.
+- All benchmark programs are in `testcases/`. Each file targets a single UB class.
 
 ## Comparison methodology
 1. Run static analyzers (`clang-tidy`, `cppcheck`) over all testcases and collect warnings.

@@ -6,7 +6,7 @@ mkdir -p tool_results
 
 echo "====== clang-tidy Results ======" > "$OUTPUT_FILE"
 
-for SRC in benchmarks/*.c benchmarks/safe_programs/*.c; do
+for SRC in testcases/*.c testcases/safe_programs/*.c; do
 	[ -f "$SRC" ] || continue
 	PROG=$(basename "$SRC" .c)
 	echo "--- $PROG ---" >> "$OUTPUT_FILE"

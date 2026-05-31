@@ -1,7 +1,7 @@
 #!/bin/bash
 set -u
 
-BENCHMARKS_DIR="./benchmarks"
+BENCHMARKS_DIR="./testcases"
 RESULTS_DIR="./llvm_experiments/results"
 mkdir -p "$RESULTS_DIR"
 

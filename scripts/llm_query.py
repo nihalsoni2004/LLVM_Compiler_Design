@@ -103,7 +103,7 @@ def main() -> None:
 
 	os.makedirs("llm_results", exist_ok=True)
 
-	c_files = sorted(glob.glob("benchmarks/*.c") + glob.glob("benchmarks/safe_programs/*.c"))
+	c_files = sorted(glob.glob("testcases/*.c") + glob.glob("testcases/safe_programs/*.c"))
 	if not c_files:
 		raise SystemExit("No benchmark .c files found.")
 

@@ -79,6 +79,31 @@ The research question is: **Can an LLM do better than existing tools?**
 
 ## 2. Prerequisites & Environment Setup
 
+### Quick start (recommended)
+
+Follow these steps on WSL/Ubuntu (or macOS with equivalent tools):
+
+```bash
+cd /mnt/f/Downloads/6th_Sem_EL/CD_Lab
+# Create and activate venv
+python3 -m venv .venv
+source .venv/bin/activate
+# Install Python deps
+pip install --upgrade pip
+pip install -r requirements.txt
+
+# Build helper (creates venv and installs if needed)
+bash build.sh
+
+# Run full pipeline (experiments, tools, LLM queries, comparison)
+bash run.sh
+
+# View results and UI
+streamlit run ui/comparison_ui.py
+```
+
+Notes: `requirements.txt` contains the minimal Python packages used by automation and UI. System tools (clang, cppcheck, clang-tidy) must be installed separately (see below).
+
 ### 2.1 Required Software
 
 | Tool | Purpose | Install Command |

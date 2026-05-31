@@ -6,7 +6,7 @@ mkdir -p tool_results
 
 echo "====== Clang Static Warnings ======" > "$OUTPUT_FILE"
 
-for SRC in benchmarks/*.c benchmarks/safe_programs/*.c; do
+for SRC in testcases/*.c testcases/safe_programs/*.c; do
 	[ -f "$SRC" ] || continue
 	PROG=$(basename "$SRC" .c)
 	echo "--- $PROG ---" >> "$OUTPUT_FILE"

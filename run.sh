@@ -6,12 +6,8 @@ ROOT_DIR="$(cd "$(dirname "$0")" && pwd)"
 
 echo "Ensuring testcases directory exists..."
 if [ ! -d "$ROOT_DIR/testcases" ]; then
-    echo "Creating testcases/ by copying benchmarks/ (if present)..."
-    if [ -d "$ROOT_DIR/benchmarks" ]; then
-        cp -r "$ROOT_DIR/benchmarks" "$ROOT_DIR/testcases"
-    else
-        mkdir -p "$ROOT_DIR/testcases"
-    fi
+    echo "Creating testcases/ directory..."
+    mkdir -p "$ROOT_DIR/testcases"
 fi
 
 echo "Running LLVM experiments..."

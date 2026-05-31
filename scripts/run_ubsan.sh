@@ -1,7 +1,7 @@
 #!/bin/bash
 set -u
 
-BENCHMARKS_DIR="./benchmarks"
+BENCHMARKS_DIR="./testcases"
 OUTPUT_FILE="./tool_results/ubsan_results.txt"
 mkdir -p tool_results
 

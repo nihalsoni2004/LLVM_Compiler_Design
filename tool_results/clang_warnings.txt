@@ -1,0 +1,131 @@
+====== Clang Static Warnings ======
+--- ub_div_zero ---
+benchmarks/ub_div_zero.c:4:5: warning: no previous prototype for function 'divide' [-Wmissing-prototypes]
+    4 | int divide(int a, int b) {
+      |     ^
+benchmarks/ub_div_zero.c:4:1: note: declare 'static' if the function is not intended to be used outside of this translation unit
+    4 | int divide(int a, int b) {
+      | ^
+      | static 
+1 warning generated.
+
+--- ub_double_free ---
+
+--- ub_invalid_shift ---
+benchmarks/ub_invalid_shift.c:10:6: warning: mixing declarations and code is incompatible with standards before C99 [-Wdeclaration-after-statement]
+   10 |         int neg_result = x << -1;
+      |             ^
+benchmarks/ub_invalid_shift.c:10:21: warning: shift count is negative [-Wshift-count-negative]
+   10 |         int neg_result = x << -1;
+      |                            ^  ~~
+2 warnings generated.
+
+--- ub_null_deref ---
+benchmarks/ub_null_deref.c:5:6: warning: no previous prototype for function 'process' [-Wmissing-prototypes]
+    5 | void process(int *p) {
+      |      ^
+benchmarks/ub_null_deref.c:5:1: note: declare 'static' if the function is not intended to be used outside of this translation unit
+    5 | void process(int *p) {
+      | ^
+      | static 
+1 warning generated.
+
+--- ub_oob_access ---
+benchmarks/ub_oob_access.c:4:5: warning: no previous prototype for function 'get_element' [-Wmissing-prototypes]
+    4 | int get_element(int arr[], int index) {
+      |     ^
+benchmarks/ub_oob_access.c:4:1: note: declare 'static' if the function is not intended to be used outside of this translation unit
+    4 | int get_element(int arr[], int index) {
+      | ^
+      | static 
+benchmarks/ub_oob_access.c:5:9: warning: unsafe buffer access [-Wunsafe-buffer-usage]
+    5 |         return arr[index];
+      |                ^~~
+2 warnings generated.
+
+--- ub_signed_overflow ---
+benchmarks/ub_signed_overflow.c:5:5: warning: no previous prototype for function 'check_overflow' [-Wmissing-prototypes]
+    5 | int check_overflow(int x) {
+      |     ^
+benchmarks/ub_signed_overflow.c:5:1: note: declare 'static' if the function is not intended to be used outside of this translation unit
+    5 | int check_overflow(int x) {
+      | ^
+      | static 
+1 warning generated.
+
+--- ub_string_literal ---
+
+--- ub_type_punning ---
+benchmarks/ub_type_punning.c:5:7: warning: no previous prototype for function 'int_to_float_ub' [-Wmissing-prototypes]
+    5 | float int_to_float_ub(int x) {
+      |       ^
+benchmarks/ub_type_punning.c:5:1: note: declare 'static' if the function is not intended to be used outside of this translation unit
+    5 | float int_to_float_ub(int x) {
+      | ^
+      | static 
+benchmarks/ub_type_punning.c:10:7: warning: no previous prototype for function 'int_to_float_safe' [-Wmissing-prototypes]
+   10 | float int_to_float_safe(int x) {
+      |       ^
+benchmarks/ub_type_punning.c:10:1: note: declare 'static' if the function is not intended to be used outside of this translation unit
+   10 | float int_to_float_safe(int x) {
+      | ^
+      | static 
+benchmarks/ub_type_punning.c:18:27: warning: implicit conversion increases floating-point precision: 'float' to 'double' [-Wdouble-promotion]
+   18 |         printf("UB way:   %f\n", int_to_float_ub(val));
+      |         ~~~~~~                   ^~~~~~~~~~~~~~~~~~~~
+benchmarks/ub_type_punning.c:19:27: warning: implicit conversion increases floating-point precision: 'float' to 'double' [-Wdouble-promotion]
+   19 |         printf("Safe way: %f\n", int_to_float_safe(val));
+      |         ~~~~~~                   ^~~~~~~~~~~~~~~~~~~~~~
+4 warnings generated.
+
+--- ub_uninitialized ---
+benchmarks/ub_uninitialized.c:9:6: warning: mixing declarations and code is incompatible with standards before C99 [-Wdeclaration-after-statement]
+    9 |         int flag;
+      |             ^
+benchmarks/ub_uninitialized.c:6:10: warning: variable 'x' is uninitialized when used here [-Wuninitialized]
+    6 |         int y = x + 1;
+      |                 ^
+benchmarks/ub_uninitialized.c:5:7: note: initialize the variable 'x' to silence this warning
+    5 |         int x;
+      |              ^
+      |               = 0
+benchmarks/ub_uninitialized.c:10:6: warning: variable 'flag' is uninitialized when used here [-Wuninitialized]
+   10 |         if (flag) {
+      |             ^~~~
+benchmarks/ub_uninitialized.c:9:10: note: initialize the variable 'flag' to silence this warning
+    9 |         int flag;
+      |                 ^
+      |                  = 0
+3 warnings generated.
+
+--- ub_use_after_free ---
+
+--- safe_arithmetic ---
+benchmarks/safe_programs/safe_arithmetic.c:10:6: warning: mixing declarations and code is incompatible with standards before C99 [-Wdeclaration-after-statement]
+   10 |         int a = INT_MAX;
+      |             ^
+1 warning generated.
+
+--- safe_array ---
+benchmarks/safe_programs/safe_array.c:4:5: warning: no previous prototype for function 'get_element_safe' [-Wmissing-prototypes]
+    4 | int get_element_safe(const int arr[], int size, int index, int *out) {
+      |     ^
+benchmarks/safe_programs/safe_array.c:4:1: note: declare 'static' if the function is not intended to be used outside of this translation unit
+    4 | int get_element_safe(const int arr[], int size, int index, int *out) {
+      | ^
+      | static 
+benchmarks/safe_programs/safe_array.c:8:9: warning: unsafe buffer access [-Wunsafe-buffer-usage]
+    8 |         *out = arr[index];
+      |                ^~~
+2 warnings generated.
+
+--- safe_pointers ---
+benchmarks/safe_programs/safe_pointers.c:5:6: warning: no previous prototype for function 'process_safe' [-Wmissing-prototypes]
+    5 | void process_safe(const int *p) {
+      |      ^
+benchmarks/safe_programs/safe_pointers.c:5:1: note: declare 'static' if the function is not intended to be used outside of this translation unit
+    5 | void process_safe(const int *p) {
+      | ^
+      | static 
+1 warning generated.
+

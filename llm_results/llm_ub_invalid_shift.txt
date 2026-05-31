@@ -1,0 +1,15 @@
+=== LLM Analysis: ub_invalid_shift ===
+=== Model: gemini-2.5-flash ===
+
+## Undefined Behavior Analysis
+
+### 1. DETECTION:
+YES
+
+### 2. IDENTIFICATION:
+*   **Line 8:** `int result = x << shift;`
+*   **Line 11:** `int neg_result = x << -1;`
+
+### 3. EXPLANATION:
+
+Both instances involve undefined behavior (UB) according to the C

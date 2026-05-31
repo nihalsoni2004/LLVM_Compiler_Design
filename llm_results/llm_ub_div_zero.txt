@@ -1,0 +1,12 @@
+=== LLM Analysis: ub_div_zero ===
+=== Model: gemini-2.5-flash ===
+
+As an expert C/C++ compiler engineer specializing in undefined behavior analysis, here's a detailed breakdown of the provided C program:
+
+---
+
+### 1. DETECTION: Does this program contain undefined behaviour (UB)?
+**YES**
+
+### 2. IDENTIFICATION: If YES, identify exactly which line(s) contain UB and what type of UB it is.
+*   **Line

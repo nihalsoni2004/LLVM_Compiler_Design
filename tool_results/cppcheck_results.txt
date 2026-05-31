@@ -1,0 +1,180 @@
+====== cppcheck Results ======
+Checking benchmarks/safe_programs/safe_arithmetic.c ...
+Defines:
+Undefines:
+Includes:
+Platform:native
+1/13 files checked 7% done
+Checking benchmarks/safe_programs/safe_array.c ...
+Defines:
+Undefines:
+Includes:
+Platform:native
+2/13 files checked 18% done
+Checking benchmarks/safe_programs/safe_pointers.c ...
+Defines:
+Undefines:
+Includes:
+Platform:native
+3/13 files checked 27% done
+Checking benchmarks/ub_div_zero.c ...
+Defines:
+Undefines:
+Includes:
+Platform:native
+benchmarks/ub_div_zero.c:5:11: error: Division by zero. [zerodiv]
+ return a / b;
+          ^
+benchmarks/ub_div_zero.c:9:26: note: Calling function 'divide', 2nd argument '0' value is 0
+ int result = divide(10, 0);
+                         ^
+benchmarks/ub_div_zero.c:5:11: note: Division by zero
+ return a / b;
+          ^
+4/13 files checked 33% done
+Checking benchmarks/ub_double_free.c ...
+Defines:
+Undefines:
+Includes:
+Platform:native
+benchmarks/ub_double_free.c:15:2: error: Memory pointed to by 'p' is freed twice. [doubleFree]
+ free(p);
+ ^
+benchmarks/ub_double_free.c:14:2: note: Memory pointed to by 'p' is freed twice.
+ free(p);
+ ^
+benchmarks/ub_double_free.c:15:2: note: Memory pointed to by 'p' is freed twice.
+ free(p);
+ ^
+5/13 files checked 40% done
+Checking benchmarks/ub_invalid_shift.c ...
+Defines:
+Undefines:
+Includes:
+Platform:native
+benchmarks/ub_invalid_shift.c:10:21: error: Shifting by a negative value is undefined behaviour [shiftNegative]
+ int neg_result = x << -1;
+                    ^
+benchmarks/ub_invalid_shift.c:7:17: error: Shifting 32-bit value by 32 bits is undefined behaviour [shiftTooManyBits]
+ int result = x << shift;
+                ^
+benchmarks/ub_invalid_shift.c:6:14: note: Assignment 'shift=32', assigned value is 32
+ int shift = 32;
+             ^
+benchmarks/ub_invalid_shift.c:7:17: note: Shift
+ int result = x << shift;
+                ^
+benchmarks/ub_invalid_shift.c:7:17: error: Signed integer overflow for expression 'x<<shift'. [integerOverflow]
+ int result = x << shift;
+                ^
+benchmarks/ub_invalid_shift.c:5:10: note: Assignment 'x=1', assigned value is 1
+ int x = 1;
+         ^
+benchmarks/ub_invalid_shift.c:7:17: note: Integer overflow
+ int result = x << shift;
+                ^
+6/13 files checked 47% done
+Checking benchmarks/ub_null_deref.c ...
+Defines:
+Undefines:
+Includes:
+Platform:native
+benchmarks/ub_null_deref.c:6:13: warning: Either the condition 'p==NULL' is redundant or there is possible null pointer dereference: p. [nullPointerRedundantCheck]
+ int val = *p;
+            ^
+benchmarks/ub_null_deref.c:7:8: note: Assuming that condition 'p==NULL' is not redundant
+ if (p == NULL) {
+       ^
+benchmarks/ub_null_deref.c:6:13: note: Null pointer dereference
+ int val = *p;
+            ^
+benchmarks/ub_null_deref.c:5:19: style: Parameter 'p' can be declared as pointer to const [constParameterPointer]
+void process(int *p) {
+                  ^
+7/13 files checked 55% done
+Checking benchmarks/ub_oob_access.c ...
+Defines:
+Undefines:
+Includes:
+Platform:native
+benchmarks/ub_oob_access.c:4:21: style: Parameter 'arr' can be declared as const array [constParameter]
+int get_element(int arr[], int index) {
+                    ^
+8/13 files checked 62% done
+Checking benchmarks/ub_signed_overflow.c ...
+Defines:
+Undefines:
+Includes:
+Platform:native
+benchmarks/ub_signed_overflow.c:6:12: warning: Invalid test for overflow 'x+1>x'; signed integer overflow is undefined behavior. Some mainstream compilers remove such overflow tests when optimising the code and assume it's always true. [invalidTestForOverflow]
+ if (x + 1 > x) {
+           ^
+9/13 files checked 69% done
+Checking benchmarks/ub_string_literal.c ...
+Defines:
+Undefines:
+Includes:
+Platform:native
+benchmarks/ub_string_literal.c:5:14: error: Modifying string literal "hello" directly or indirectly is undefined behaviour. [stringLiteralWrite]
+ char *str = "hello";
+             ^
+benchmarks/ub_string_literal.c:6:2: note: Modifying string literal "hello" directly or indirectly is undefined behaviour.
+ str[0] = 'H';
+ ^
+benchmarks/ub_string_literal.c:5:14: note: Modifying string literal "hello" directly or indirectly is undefined behaviour.
+ char *str = "hello";
+             ^
+10/13 files checked 74% done
+Checking benchmarks/ub_type_punning.c ...
+Defines:
+Undefines:
+Includes:
+Platform:native
+benchmarks/ub_type_punning.c:6:14: portability: Casting between signed int * and float * which have an incompatible binary data representation. [invalidPointerCast]
+ float *fp = (float *)&x;
+             ^
+benchmarks/ub_type_punning.c:6:9: style: Variable 'fp' can be declared as pointer to const [constVariablePointer]
+ float *fp = (float *)&x;
+        ^
+11/13 files checked 86% done
+Checking benchmarks/ub_uninitialized.c ...
+Defines:
+Undefines:
+Includes:
+Platform:native
+benchmarks/ub_uninitialized.c:6:10: error: Uninitialized variable: x [uninitvar]
+ int y = x + 1;
+         ^
+benchmarks/ub_uninitialized.c:10:6: error: Uninitialized variable: flag [uninitvar]
+ if (flag) {
+     ^
+12/13 files checked 92% done
+Checking benchmarks/ub_use_after_free.c ...
+Defines:
+Undefines:
+Includes:
+Platform:native
+benchmarks/ub_use_after_free.c:15:3: error: Dereferencing 'p' after it is deallocated / released [deallocuse]
+ *p = 100;
+  ^
+benchmarks/ub_use_after_free.c:16:2: error: Memory pointed to by 'p' is freed twice. [doubleFree]
+ free(p);
+ ^
+benchmarks/ub_use_after_free.c:12:2: note: Memory pointed to by 'p' is freed twice.
+ free(p);
+ ^
+benchmarks/ub_use_after_free.c:16:2: note: Memory pointed to by 'p' is freed twice.
+ free(p);
+ ^
+13/13 files checked 100% done
+benchmarks/ub_null_deref.c:6:13: error: Null pointer dereference: p [ctunullpointer]
+ int val = *p;
+            ^
+benchmarks/ub_null_deref.c:15:9: note: Calling function process, 1st argument is null
+ process(NULL);
+        ^
+benchmarks/ub_null_deref.c:6:13: note: Dereferencing argument p that is null
+ int val = *p;
+            ^
+nofile:0:0: information: Active checkers: 106/592 (use --checkers-report=<filename> to see details) [checkersReport]
+

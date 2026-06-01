@@ -26,7 +26,7 @@ Analyze the following C/C++ program carefully:
 {code}
 
 Please answer the following:
-1. DETECTION: Does this program contain undefined behaviour (UB)? YES or NO.
+1. DETECTION: Does this program contain undefined behaviour (UB)? Answer YES or NO.
 2. IDENTIFICATION: Which line(s) and what type of UB?
 3. EXPLANATION: Why this is UB according to C/C++ rules?
 4. LLVM OPTIMIZATION: How LLVM/Clang may optimize under UB assumptions?
@@ -232,7 +232,28 @@ def ensure_tool_available(tool: str) -> bool:
     return shutil.which(tool) is not None
 
 
+def load_local_env() -> None:
+    root_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    env_path = os.path.join(root_dir, ".env.local")
+    if not os.path.isfile(env_path):
+        return
+
+    with open(env_path, "r", encoding="utf-8") as env_file:
+        for raw_line in env_file:
+            line = raw_line.strip()
+            if not line or line.startswith("#") or "=" not in line:
+                continue
+            key, value = line.split("=", 1)
+            key = key.strip()
+            value = value.strip().strip('"').strip("'")
+            if key and key not in os.environ:
+                os.environ[key] = value
+
+
 def main() -> None:
+    # Load environment variables from .env.local if present
+    load_local_env()
+
     st.set_page_config(page_title="UB 5-Way Comparator", layout="wide")
 
     st.markdown(

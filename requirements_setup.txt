@@ -95,9 +95,11 @@ xlsxwriter==3.2.9
 
 ## 5) Environment variables for LLM (Gemini)
 
+Recommended workflow: copy `.env.example` to `.env.local`, fill the three keys, and keep `.env.local` untracked. The scripts automatically load `.env.local`.
+
 ```bash
-export GEMINI_API_KEY_2="<your-key-2>"
-export GEMINI_API_KEY_3="<your-key-3>"
+cp .env.example .env.local
+# edit .env.local and add GEMINI_API_KEY_1/2/3
 ```
 
 ## 6) Run key project pipelines

@@ -104,6 +104,8 @@ streamlit run ui/comparison_ui.py
 
 Notes: `requirements.txt` contains the minimal Python packages used by automation and UI. System tools (clang, cppcheck, clang-tidy) must be installed separately (see below).
 
+Gemini setup: copy `.env.example` to `.env.local`, fill your own keys, and keep `.env.local` untracked. The LLM scripts default to `gemini-2.5-flash` unless you override `LLM_MODEL`.
+
 ### 2.1 Required Software
 
 | Tool | Purpose | Install Command |
@@ -1241,6 +1243,7 @@ clang-tidy-17
 - [ ] Run `scripts/run_experiments.sh` to generate IR files
 - [ ] Compare O0 vs O2 IR for signed overflow manually
 - [ ] Run `scripts/run_all_tools.sh` to collect tool results
+- [ ] Copy `.env.example` to `.env.local` and provide Gemini API keys
 - [ ] Query LLM for each program using the prompt template
 - [ ] Fill in comparison table manually
 - [ ] Run `scripts/compare_results.py` to generate formatted table

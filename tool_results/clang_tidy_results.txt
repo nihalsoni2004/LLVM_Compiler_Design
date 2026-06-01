@@ -1,98 +1,98 @@
 ====== clang-tidy Results ======
 --- ub_div_zero ---
 1273 warnings generated.
-/mnt/f/Downloads/6th_Sem_EL/CD_Lab/benchmarks/ub_div_zero.c:5:11: warning: Division by zero [clang-analyzer-core.DivideZero]
-    5 |         return a / b;
-      |                  ^
-/mnt/f/Downloads/6th_Sem_EL/CD_Lab/benchmarks/ub_div_zero.c:9:26: note: Passing the value 0 via 2nd parameter 'b'
-    9 |         int result = divide(10, 0);
-      |                                 ^
-/mnt/f/Downloads/6th_Sem_EL/CD_Lab/benchmarks/ub_div_zero.c:9:15: note: Calling 'divide'
-    9 |         int result = divide(10, 0);
-      |                      ^~~~~~~~~~~~~
-/mnt/f/Downloads/6th_Sem_EL/CD_Lab/benchmarks/ub_div_zero.c:5:11: note: Division by zero
-    5 |         return a / b;
-      |                ~~^~~
+/mnt/c/6th semester EL's/Compiler design lab EL/Implementation/LLVM_Compiler_Design/testcases/ub_div_zero.c:5:14: warning: Division by zero [clang-analyzer-core.DivideZero]
+    5 |     return a / b;
+      |              ^
+/mnt/c/6th semester EL's/Compiler design lab EL/Implementation/LLVM_Compiler_Design/testcases/ub_div_zero.c:9:29: note: Passing the value 0 via 2nd parameter 'b'
+    9 |     int result = divide(10, 0);
+      |                             ^
+/mnt/c/6th semester EL's/Compiler design lab EL/Implementation/LLVM_Compiler_Design/testcases/ub_div_zero.c:9:18: note: Calling 'divide'
+    9 |     int result = divide(10, 0);
+      |                  ^~~~~~~~~~~~~
+/mnt/c/6th semester EL's/Compiler design lab EL/Implementation/LLVM_Compiler_Design/testcases/ub_div_zero.c:5:14: note: Division by zero
+    5 |     return a / b;
+      |            ~~^~~
 Suppressed 1272 warnings (1272 in non-user code).
 Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
 
 --- ub_double_free ---
 1522 warnings generated.
-/mnt/f/Downloads/6th_Sem_EL/CD_Lab/benchmarks/ub_double_free.c:15:2: warning: Attempt to free released memory [clang-analyzer-unix.Malloc]
-   15 |         free(p);
-      |         ^~~~~~~
-/mnt/f/Downloads/6th_Sem_EL/CD_Lab/benchmarks/ub_double_free.c:6:18: note: Memory is allocated
-    6 |         int *p = (int *)malloc(sizeof(int));
-      |                         ^~~~~~~~~~~~~~~~~~~
-/mnt/f/Downloads/6th_Sem_EL/CD_Lab/benchmarks/ub_double_free.c:7:6: note: Assuming 'p' is not equal to NULL
-    7 |         if (p == NULL) {
-      |             ^~~~~~~~~
-/mnt/f/Downloads/6th_Sem_EL/CD_Lab/benchmarks/ub_double_free.c:7:2: note: Taking false branch
-    7 |         if (p == NULL) {
-      |         ^
-/mnt/f/Downloads/6th_Sem_EL/CD_Lab/benchmarks/ub_double_free.c:14:2: note: Memory is released
-   14 |         free(p);
-      |         ^~~~~~~
-/mnt/f/Downloads/6th_Sem_EL/CD_Lab/benchmarks/ub_double_free.c:15:2: note: Attempt to free released memory
-   15 |         free(p);
-      |         ^~~~~~~
+/mnt/c/6th semester EL's/Compiler design lab EL/Implementation/LLVM_Compiler_Design/testcases/ub_double_free.c:15:5: warning: Attempt to free released memory [clang-analyzer-unix.Malloc]
+   15 |     free(p);
+      |     ^~~~~~~
+/mnt/c/6th semester EL's/Compiler design lab EL/Implementation/LLVM_Compiler_Design/testcases/ub_double_free.c:6:21: note: Memory is allocated
+    6 |     int *p = (int *)malloc(sizeof(int));
+      |                     ^~~~~~~~~~~~~~~~~~~
+/mnt/c/6th semester EL's/Compiler design lab EL/Implementation/LLVM_Compiler_Design/testcases/ub_double_free.c:7:9: note: Assuming 'p' is not equal to NULL
+    7 |     if (p == NULL) {
+      |         ^~~~~~~~~
+/mnt/c/6th semester EL's/Compiler design lab EL/Implementation/LLVM_Compiler_Design/testcases/ub_double_free.c:7:5: note: Taking false branch
+    7 |     if (p == NULL) {
+      |     ^
+/mnt/c/6th semester EL's/Compiler design lab EL/Implementation/LLVM_Compiler_Design/testcases/ub_double_free.c:14:5: note: Memory is released
+   14 |     free(p);
+      |     ^~~~~~~
+/mnt/c/6th semester EL's/Compiler design lab EL/Implementation/LLVM_Compiler_Design/testcases/ub_double_free.c:15:5: note: Attempt to free released memory
+   15 |     free(p);
+      |     ^~~~~~~
 Suppressed 1521 warnings (1521 in non-user code).
 Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
 
 --- ub_invalid_shift ---
 1274 warnings generated.
-/mnt/f/Downloads/6th_Sem_EL/CD_Lab/benchmarks/ub_invalid_shift.c:7:17: warning: Left shift by '32' overflows the capacity of 'int' [clang-analyzer-core.BitwiseShift]
-    7 |         int result = x << shift;
-      |                      ~~^~~~~~~~
-/mnt/f/Downloads/6th_Sem_EL/CD_Lab/benchmarks/ub_invalid_shift.c:5:2: note: 'x' initialized to 1
-    5 |         int x = 1;
-      |         ^~~~~
-/mnt/f/Downloads/6th_Sem_EL/CD_Lab/benchmarks/ub_invalid_shift.c:6:2: note: 'shift' initialized to 32
-    6 |         int shift = 32;
-      |         ^~~~~~~~~
-/mnt/f/Downloads/6th_Sem_EL/CD_Lab/benchmarks/ub_invalid_shift.c:7:17: note: The result of left shift is undefined because the right operand '32' is not smaller than 32, the capacity of 'int'
-    7 |         int result = x << shift;
-      |                      ~~^~~~~~~~
-/mnt/f/Downloads/6th_Sem_EL/CD_Lab/benchmarks/ub_invalid_shift.c:10:21: warning: shift count is negative [clang-diagnostic-shift-count-negative]
-   10 |         int neg_result = x << -1;
-      |                            ^  ~~
+/mnt/c/6th semester EL's/Compiler design lab EL/Implementation/LLVM_Compiler_Design/testcases/ub_invalid_shift.c:7:20: warning: Left shift by '32' overflows the capacity of 'int' [clang-analyzer-core.BitwiseShift]
+    7 |     int result = x << shift;
+      |                  ~~^~~~~~~~
+/mnt/c/6th semester EL's/Compiler design lab EL/Implementation/LLVM_Compiler_Design/testcases/ub_invalid_shift.c:5:5: note: 'x' initialized to 1
+    5 |     int x = 1;
+      |     ^~~~~
+/mnt/c/6th semester EL's/Compiler design lab EL/Implementation/LLVM_Compiler_Design/testcases/ub_invalid_shift.c:6:5: note: 'shift' initialized to 32
+    6 |     int shift = 32;
+      |     ^~~~~~~~~
+/mnt/c/6th semester EL's/Compiler design lab EL/Implementation/LLVM_Compiler_Design/testcases/ub_invalid_shift.c:7:20: note: The result of left shift is undefined because the right operand '32' is not smaller than 32, the capacity of 'int'
+    7 |     int result = x << shift;
+      |                  ~~^~~~~~~~
+/mnt/c/6th semester EL's/Compiler design lab EL/Implementation/LLVM_Compiler_Design/testcases/ub_invalid_shift.c:10:24: warning: shift count is negative [clang-diagnostic-shift-count-negative]
+   10 |     int neg_result = x << -1;
+      |                        ^  ~~
 Suppressed 1272 warnings (1272 in non-user code).
 Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
 
 --- ub_null_deref ---
 1309 warnings generated.
-/mnt/f/Downloads/6th_Sem_EL/CD_Lab/benchmarks/ub_null_deref.c:6:12: warning: Dereference of null pointer (loaded from variable 'p') [clang-analyzer-core.NullDereference]
-    6 |         int val = *p;
-      |                   ^
-/mnt/f/Downloads/6th_Sem_EL/CD_Lab/benchmarks/ub_null_deref.c:15:10: note: Passing null pointer value via 1st parameter 'p'
-   15 |         process(NULL);
-      |                 ^
+/mnt/c/6th semester EL's/Compiler design lab EL/Implementation/LLVM_Compiler_Design/testcases/ub_null_deref.c:6:15: warning: Dereference of null pointer (loaded from variable 'p') [clang-analyzer-core.NullDereference]
+    6 |     int val = *p;
+      |               ^
+/mnt/c/6th semester EL's/Compiler design lab EL/Implementation/LLVM_Compiler_Design/testcases/ub_null_deref.c:15:13: note: Passing null pointer value via 1st parameter 'p'
+   15 |     process(NULL);
+      |             ^
 /usr/lib/llvm-18/lib/clang/18/include/__stddef_null.h:26:14: note: expanded from macro 'NULL'
    26 | #define NULL ((void*)0)
       |              ^~~~~~~~~~
-/mnt/f/Downloads/6th_Sem_EL/CD_Lab/benchmarks/ub_null_deref.c:15:2: note: Calling 'process'
-   15 |         process(NULL);
-      |         ^~~~~~~~~~~~~
-/mnt/f/Downloads/6th_Sem_EL/CD_Lab/benchmarks/ub_null_deref.c:6:12: note: Dereference of null pointer (loaded from variable 'p')
-    6 |         int val = *p;
-      |                   ^~
+/mnt/c/6th semester EL's/Compiler design lab EL/Implementation/LLVM_Compiler_Design/testcases/ub_null_deref.c:15:5: note: Calling 'process'
+   15 |     process(NULL);
+      |     ^~~~~~~~~~~~~
+/mnt/c/6th semester EL's/Compiler design lab EL/Implementation/LLVM_Compiler_Design/testcases/ub_null_deref.c:6:15: note: Dereference of null pointer (loaded from variable 'p')
+    6 |     int val = *p;
+      |               ^~
 Suppressed 1308 warnings (1308 in non-user code).
 Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
 
 --- ub_oob_access ---
 1273 warnings generated.
-/mnt/f/Downloads/6th_Sem_EL/CD_Lab/benchmarks/ub_oob_access.c:5:2: warning: Undefined or garbage value returned to caller [clang-analyzer-core.uninitialized.UndefReturn]
-    5 |         return arr[index];
-      |         ^
-/mnt/f/Downloads/6th_Sem_EL/CD_Lab/benchmarks/ub_oob_access.c:10:35: note: Passing the value 10 via 2nd parameter 'index'
-   10 |         printf("%d\n", get_element(data, 10));
-      |                                          ^~
-/mnt/f/Downloads/6th_Sem_EL/CD_Lab/benchmarks/ub_oob_access.c:10:17: note: Calling 'get_element'
-   10 |         printf("%d\n", get_element(data, 10));
-      |                        ^~~~~~~~~~~~~~~~~~~~~
-/mnt/f/Downloads/6th_Sem_EL/CD_Lab/benchmarks/ub_oob_access.c:5:2: note: Undefined or garbage value returned to caller
-    5 |         return arr[index];
-      |         ^      ~~~~~~~~~~
+/mnt/c/6th semester EL's/Compiler design lab EL/Implementation/LLVM_Compiler_Design/testcases/ub_oob_access.c:5:5: warning: Undefined or garbage value returned to caller [clang-analyzer-core.uninitialized.UndefReturn]
+    5 |     return arr[index];
+      |     ^
+/mnt/c/6th semester EL's/Compiler design lab EL/Implementation/LLVM_Compiler_Design/testcases/ub_oob_access.c:10:38: note: Passing the value 10 via 2nd parameter 'index'
+   10 |     printf("%d\n", get_element(data, 10));
+      |                                      ^~
+/mnt/c/6th semester EL's/Compiler design lab EL/Implementation/LLVM_Compiler_Design/testcases/ub_oob_access.c:10:20: note: Calling 'get_element'
+   10 |     printf("%d\n", get_element(data, 10));
+      |                    ^~~~~~~~~~~~~~~~~~~~~
+/mnt/c/6th semester EL's/Compiler design lab EL/Implementation/LLVM_Compiler_Design/testcases/ub_oob_access.c:5:5: note: Undefined or garbage value returned to caller
+    5 |     return arr[index];
+      |     ^      ~~~~~~~~~~
 Suppressed 1272 warnings (1272 in non-user code).
 Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
 
@@ -108,49 +108,49 @@ Use -header-filter=.* to display errors from all non-system headers. Use -system
 
 --- ub_type_punning ---
 1474 warnings generated.
-/mnt/f/Downloads/6th_Sem_EL/CD_Lab/benchmarks/ub_type_punning.c:12:2: warning: Call to function 'memcpy' is insecure as it does not provide security checks introduced in the C11 standard. Replace with analogous functions that support length arguments or provides boundary checks such as 'memcpy_s' in case of C11 [clang-analyzer-security.insecureAPI.DeprecatedOrUnsafeBufferHandling]
-   12 |         memcpy(&result, &x, sizeof(float));
-      |         ^~~~~~
-/mnt/f/Downloads/6th_Sem_EL/CD_Lab/benchmarks/ub_type_punning.c:12:2: note: Call to function 'memcpy' is insecure as it does not provide security checks introduced in the C11 standard. Replace with analogous functions that support length arguments or provides boundary checks such as 'memcpy_s' in case of C11
-   12 |         memcpy(&result, &x, sizeof(float));
-      |         ^~~~~~
+/mnt/c/6th semester EL's/Compiler design lab EL/Implementation/LLVM_Compiler_Design/testcases/ub_type_punning.c:12:5: warning: Call to function 'memcpy' is insecure as it does not provide security checks introduced in the C11 standard. Replace with analogous functions that support length arguments or provides boundary checks such as 'memcpy_s' in case of C11 [clang-analyzer-security.insecureAPI.DeprecatedOrUnsafeBufferHandling]
+   12 |     memcpy(&result, &x, sizeof(float));
+      |     ^~~~~~
+/mnt/c/6th semester EL's/Compiler design lab EL/Implementation/LLVM_Compiler_Design/testcases/ub_type_punning.c:12:5: note: Call to function 'memcpy' is insecure as it does not provide security checks introduced in the C11 standard. Replace with analogous functions that support length arguments or provides boundary checks such as 'memcpy_s' in case of C11
+   12 |     memcpy(&result, &x, sizeof(float));
+      |     ^~~~~~
 Suppressed 1473 warnings (1473 in non-user code).
 Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
 
 --- ub_uninitialized ---
 1273 warnings generated.
-/mnt/f/Downloads/6th_Sem_EL/CD_Lab/benchmarks/ub_uninitialized.c:6:12: warning: The left operand of '+' is a garbage value [clang-analyzer-core.UndefinedBinaryOperatorResult]
-    6 |         int y = x + 1;
-      |                 ~ ^
-/mnt/f/Downloads/6th_Sem_EL/CD_Lab/benchmarks/ub_uninitialized.c:5:2: note: 'x' declared without an initial value
-    5 |         int x;
-      |         ^~~~~
-/mnt/f/Downloads/6th_Sem_EL/CD_Lab/benchmarks/ub_uninitialized.c:6:12: note: The left operand of '+' is a garbage value
-    6 |         int y = x + 1;
-      |                 ~ ^
+/mnt/c/6th semester EL's/Compiler design lab EL/Implementation/LLVM_Compiler_Design/testcases/ub_uninitialized.c:6:15: warning: The left operand of '+' is a garbage value [clang-analyzer-core.UndefinedBinaryOperatorResult]
+    6 |     int y = x + 1;
+      |             ~ ^
+/mnt/c/6th semester EL's/Compiler design lab EL/Implementation/LLVM_Compiler_Design/testcases/ub_uninitialized.c:5:5: note: 'x' declared without an initial value
+    5 |     int x;
+      |     ^~~~~
+/mnt/c/6th semester EL's/Compiler design lab EL/Implementation/LLVM_Compiler_Design/testcases/ub_uninitialized.c:6:15: note: The left operand of '+' is a garbage value
+    6 |     int y = x + 1;
+      |             ~ ^
 Suppressed 1272 warnings (1272 in non-user code).
 Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
 
 --- ub_use_after_free ---
 1522 warnings generated.
-/mnt/f/Downloads/6th_Sem_EL/CD_Lab/benchmarks/ub_use_after_free.c:14:17: warning: Use of memory after it is freed [clang-analyzer-unix.Malloc]
-   14 |         printf("%d\n", *p);
-      |                        ^~
-/mnt/f/Downloads/6th_Sem_EL/CD_Lab/benchmarks/ub_use_after_free.c:6:18: note: Memory is allocated
-    6 |         int *p = (int *)malloc(sizeof(int));
-      |                         ^~~~~~~~~~~~~~~~~~~
-/mnt/f/Downloads/6th_Sem_EL/CD_Lab/benchmarks/ub_use_after_free.c:7:6: note: Assuming 'p' is not equal to NULL
-    7 |         if (p == NULL) {
-      |             ^~~~~~~~~
-/mnt/f/Downloads/6th_Sem_EL/CD_Lab/benchmarks/ub_use_after_free.c:7:2: note: Taking false branch
-    7 |         if (p == NULL) {
-      |         ^
-/mnt/f/Downloads/6th_Sem_EL/CD_Lab/benchmarks/ub_use_after_free.c:12:2: note: Memory is released
-   12 |         free(p);
-      |         ^~~~~~~
-/mnt/f/Downloads/6th_Sem_EL/CD_Lab/benchmarks/ub_use_after_free.c:14:17: note: Use of memory after it is freed
-   14 |         printf("%d\n", *p);
-      |                        ^~
+/mnt/c/6th semester EL's/Compiler design lab EL/Implementation/LLVM_Compiler_Design/testcases/ub_use_after_free.c:14:20: warning: Use of memory after it is freed [clang-analyzer-unix.Malloc]
+   14 |     printf("%d\n", *p);
+      |                    ^~
+/mnt/c/6th semester EL's/Compiler design lab EL/Implementation/LLVM_Compiler_Design/testcases/ub_use_after_free.c:6:21: note: Memory is allocated
+    6 |     int *p = (int *)malloc(sizeof(int));
+      |                     ^~~~~~~~~~~~~~~~~~~
+/mnt/c/6th semester EL's/Compiler design lab EL/Implementation/LLVM_Compiler_Design/testcases/ub_use_after_free.c:7:9: note: Assuming 'p' is not equal to NULL
+    7 |     if (p == NULL) {
+      |         ^~~~~~~~~
+/mnt/c/6th semester EL's/Compiler design lab EL/Implementation/LLVM_Compiler_Design/testcases/ub_use_after_free.c:7:5: note: Taking false branch
+    7 |     if (p == NULL) {
+      |     ^
+/mnt/c/6th semester EL's/Compiler design lab EL/Implementation/LLVM_Compiler_Design/testcases/ub_use_after_free.c:12:5: note: Memory is released
+   12 |     free(p);
+      |     ^~~~~~~
+/mnt/c/6th semester EL's/Compiler design lab EL/Implementation/LLVM_Compiler_Design/testcases/ub_use_after_free.c:14:20: note: Use of memory after it is freed
+   14 |     printf("%d\n", *p);
+      |                    ^~
 Suppressed 1521 warnings (1521 in non-user code).
 Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
 
@@ -165,7 +165,7 @@ Suppressed 1272 warnings (1272 in non-user code).
 Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
 
 --- safe_pointers ---
-1308 warnings generated.
-Suppressed 1308 warnings (1308 in non-user code).
+1521 warnings generated.
+Suppressed 1521 warnings (1521 in non-user code).
 Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
 

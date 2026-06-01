@@ -5,3 +5,16 @@ __pycache__/
 .DS_Store
 .vscode/
 .idea/
+
+# Compiled Executables
+test_O0
+test_O2
+test_ubsan
+*.out
+*.exe
+
+# Dynamically Generated Build/Run Artifacts
+llvm_experiments/results/
+tool_results/
+llm_results/
+results/

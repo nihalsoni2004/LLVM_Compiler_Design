@@ -153,6 +153,13 @@ def render_scroll_table(df: pd.DataFrame) -> None:
             val = "" if pd.isna(row[col]) else str(row[col])
             if col == "Key Errors/Findings":
                 tds.append(f"<td class='findings-cell'>{escape(val)}</td>")
+            elif col == "Detected UB":
+                if val == "YES":
+                    tds.append("<td><span class='badge-yes' style='background-color:#dcfce7;color:#16a34a;padding:4px 10px;border-radius:20px;font-weight:700;font-size:0.78rem;border:1px solid #bbf7d0;letter-spacing:0.3px;'>YES</span></td>")
+                elif val == "NO":
+                    tds.append("<td><span class='badge-no' style='background-color:#fee2e2;color:#dc2626;padding:4px 10px;border-radius:20px;font-weight:700;font-size:0.78rem;border:1px solid #fecaca;letter-spacing:0.3px;'>NO</span></td>")
+                else:
+                    tds.append("<td><span class='badge-unknown' style='background-color:#fef3c7;color:#d97706;padding:4px 10px;border-radius:20px;font-weight:700;font-size:0.78rem;border:1px solid #fde68a;letter-spacing:0.3px;'>UNKNOWN</span></td>")
             else:
                 tds.append(f"<td>{escape(val)}</td>")
         body_rows.append("<tr>" + "".join(tds) + "</tr>")
@@ -464,6 +471,39 @@ def main() -> None:
     st.subheader("Final 5-Way Comparison")
     df = pd.DataFrame(rows)
     render_scroll_table(df)
+
+    # 1. Advanced Metrics Column Grid
+    st.markdown("### 📊 Metrics Summary")
+    m1, m2, m3, m4 = st.columns(4)
+
+    yes_count = len(df[df["Detected UB"] == "YES"])
+
+    m1.metric(label="Tools Flagging UB", value=f"{yes_count} / 5", help="Total engines that successfully detected the UB pattern.")
+    m2.metric(label="Sanitization Verdict", value=df[df["Tool"] == "UBSan"]["Detected UB"].values[0])
+    m3.metric(label="AI Verdict", value=df[df["Tool"] == "LLM (Gemini 2.5 Flash)"]["Detected UB"].values[0])
+
+    confidence_score = "CRITICAL" if yes_count >= 4 else ("HIGH" if yes_count >= 2 else "LOW")
+    m4.metric(label="UB Severity Consensus", value=confidence_score, help="Diagnosis severity consensus based on tool agreement.")
+
+    # 2. Beautiful Visual Bar Chart
+    st.markdown("### 📈 Detection Matrix")
+    chart_df = pd.DataFrame({
+        "Engine": df["Tool"],
+        "Detected UB": df["Detected UB"].map({"YES": 1.0, "NO": 0.0, "UNKNOWN": 0.0})
+    })
+    st.bar_chart(
+        chart_df.set_index("Engine"),
+        color="#0ea5e9"
+    )
+
+    # 3. Source Code Previewer
+    try:
+        with open(src_path, "r", encoding="utf-8", errors="ignore") as f_preview:
+            code_preview = f_preview.read()
+        with st.expander("📄 View Analyzed Source Code", expanded=True):
+            st.code(code_preview, language="c")
+    except Exception:
+        pass
 
     st.subheader("Full Findings (No Truncation)")
     for row in rows:

@@ -126,20 +126,24 @@ def parse_tool_section(tool_text: str, program: str, patterns_by_program: dict[s
 
     diagnostic_text = "\n".join(diagnostic_lines)
     return has_any_pattern(diagnostic_text, patterns)
-
-
 def parse_cppcheck(cppcheck_text: str, program: str) -> bool:
     patterns = CPPCHECK_PATTERNS.get(program, [])
     if not patterns:
         return False
 
-    file_marker = f"benchmarks/{program}.c"
+    file_markers = [
+        f"benchmarks/{program}.c",
+        f"testcases/{program}.c",
+    ]
     if program.startswith("safe_"):
-        file_marker = f"benchmarks/safe_programs/{program}.c"
+        file_markers.extend([
+            f"benchmarks/safe_programs/{program}.c",
+            f"testcases/safe_programs/{program}.c",
+        ])
 
     relevant = []
     for line in cppcheck_text.splitlines():
-        if file_marker in line and ("error:" in line.lower() or "warning:" in line.lower()):
+        if any(marker in line for marker in file_markers) and ("error:" in line.lower() or "warning:" in line.lower()):
             relevant.append(line)
 
     return has_any_pattern("\n".join(relevant), patterns)

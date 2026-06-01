@@ -1,29 +1,44 @@
 #!/bin/bash
-set -euo pipefail
+# run.sh
+# Run full pipeline (experiments, tools, LLM queries, comparison)
 
-# Top-level run script: sync testcases, run experiments and analysis, then compare
-ROOT_DIR="$(cd "$(dirname "$0")" && pwd)"
+echo "=== Starting LLVM Compiler Design Project Pipeline ==="
 
-echo "Ensuring testcases directory exists..."
-if [ ! -d "$ROOT_DIR/testcases" ]; then
-    echo "Creating testcases/ directory..."
-    mkdir -p "$ROOT_DIR/testcases"
+# Check virtual environment
+if [ -d ".venv" ]; then
+    echo "Activating virtual environment..."
+    source .venv/bin/activate
+else
+    echo "WARNING: .venv directory not found. Running with global python if available."
 fi
 
-echo "Running LLVM experiments..."
-bash scripts/run_experiments.sh || echo "run_experiments.sh failed"
+# 1. Run LLVM experiments
+echo ""
+echo "--- Phase 3: Generating LLVM IR Optimization Experiments ---"
+bash scripts/run_experiments.sh
 
-echo "Running all analysis tools..."
-bash scripts/run_all_tools.sh || echo "run_all_tools.sh failed"
+# 2. Run static/dynamic tools
+echo ""
+echo "--- Phase 4: Running Existing Tools (UBSan, Clang Warnings, clang-tidy, cppcheck) ---"
+bash scripts/run_all_tools.sh
 
-echo "Querying LLM (if configured)..."
-if [ -f scripts/llm_query.py ]; then
-    python scripts/llm_query.py || echo "llm_query.py failed"
+# 3. Query LLM
+echo ""
+echo "--- Phase 5: Querying LLM (Gemini) for UB Analysis ---"
+if [ -n "$GEMINI_API_KEY_1" ] || [ -n "$GEMINI_API_KEY_2" ] || [ -n "$GEMINI_API_KEY_3" ]; then
+    python scripts/llm_query.py
+else
+    echo "Skipping automated LLM query because GEMINI_API_KEY_1, GEMINI_API_KEY_2, or GEMINI_API_KEY_3 is not set."
+    echo "To run LLM querying automatically, set your API key, e.g.:"
+    echo "  export GEMINI_API_KEY_1=\"AIzaSy...\""
 fi
 
-echo "Comparing results..."
-if [ -f scripts/compare_results.py ]; then
-    python scripts/compare_results.py || echo "compare_results.py failed"
-fi
+# 4. Generate Comparison Table
+echo ""
+echo "--- Phase 6: Generating Comparison Tables ---"
+python scripts/compare_results.py
 
-echo "Run complete. Results in tool_results/, llvm_experiments/results/, llm_results/, results/"
+echo ""
+echo "=== Pipeline Completed! ==="
+echo "You can now run the Streamlit UI to view the 5-way comparison table:"
+echo "  streamlit run ui/comparison_ui.py"

@@ -104,7 +104,7 @@ streamlit run ui/comparison_ui.py
 
 Notes: `requirements.txt` contains the minimal Python packages used by automation and UI. System tools (clang, cppcheck, clang-tidy) must be installed separately (see below).
 
-Gemini setup: copy `.env.example` to `.env.local`, fill your own keys, and keep `.env.local` untracked. The LLM scripts default to `gemini-2.5-flash` unless you override `LLM_MODEL`.
+Gemini setup: copy `.env.example` to `.env.local`, fill your own keys, and keep `.env.local` untracked. Both `scripts/llm_query.py` and `ui/comparison_ui.py` auto-load `.env.local` and try `GEMINI_API_KEY_1`, then `GEMINI_API_KEY_2`, then `GEMINI_API_KEY_3`. The LLM scripts default to `gemini-2.5-flash` unless you override `LLM_MODEL`.
 
 ### 2.1 Required Software
 

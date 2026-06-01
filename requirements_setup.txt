@@ -95,7 +95,7 @@ xlsxwriter==3.2.9
 
 ## 5) Environment variables for LLM (Gemini)
 
-Recommended workflow: copy `.env.example` to `.env.local`, fill the three keys, and keep `.env.local` untracked. The scripts automatically load `.env.local`.
+Recommended workflow: copy `.env.example` to `.env.local`, fill the three keys, and keep `.env.local` untracked. The scripts automatically load `.env.local`. The fallback order is `GEMINI_API_KEY_1` -> `GEMINI_API_KEY_2` -> `GEMINI_API_KEY_3`.
 
 ```bash
 cp .env.example .env.local

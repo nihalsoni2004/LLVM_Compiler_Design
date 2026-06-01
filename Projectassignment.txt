@@ -1,0 +1,25 @@
+Assignment 13 — AI for Undefined Behaviour Detection
+in C/C++ Programs
+Description: Study whether an LLM can detect undefined behaviour (UB) in C/C++ source
+code before LLVM/Clang optimizations exploit that UB and transform the program in
+surprising ways.
+Background: In C/C++, operations such as signed integer overflow, null dereference, invalid
+shifts, and out-of-bounds access may have undefined behaviour. Modern compilers like
+LLVM legally optimize under the assumption that UB does not occur. This makes UB both a
+language-semantics problem and a compiler-analysis problem. Existing tools such as UBSan
+and clang warnings help, but they do not fully solve the problem: UBSan is runtime-based,
+and static tools are incomplete.
+Objective: Investigate whether an LLM can:
+(a) identify UB patterns in C/C++ programs,
+
+(b) explain why they are UB,
+(c) predict how LLVM may optimize based on those assumptions, and
+(d) compare its performance against existing tools such as UBSan, clang-tidy, and static
+analysers.
+Deliverables:
+• A benchmark set of small C/C++ programs containing different classes of UB
+• LLVM/Clang experiments showing how optimization changes code behavior or
+reasoning
+• A comparison of LLM predictions vs UBSan / clang warnings / static analysis
+• A report discussing soundness, completeness, false positives, and false negatives
+• A final presentation proposing a hybrid LLM + static-analysis pipeline

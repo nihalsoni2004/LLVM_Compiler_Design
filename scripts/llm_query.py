@@ -8,6 +8,26 @@ import requests
 MODEL = os.environ.get("LLM_MODEL", "gemini-2.5-flash")
 GEMINI_API_URL = "https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent"
 
+def load_local_env() -> None:
+	root_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+	env_path = os.path.join(root_dir, ".env.local")
+	if not os.path.isfile(env_path):
+		return
+
+	with open(env_path, "r", encoding="utf-8") as env_file:
+		for raw_line in env_file:
+			line = raw_line.strip()
+			if not line or line.startswith("#") or "=" not in line:
+				continue
+			key, value = line.split("=", 1)
+			key = key.strip()
+			value = value.strip().strip('"').strip("'")
+			if key and key not in os.environ:
+				os.environ[key] = value
+
+
+load_local_env()
+
 # No embedded API keys. Always set GEMINI_API_KEY_1/2/3 in the environment.
 DEFAULT_GEMINI_API_KEY_1 = ""
 DEFAULT_GEMINI_API_KEY_2 = ""
